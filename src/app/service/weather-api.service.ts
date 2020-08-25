@@ -15,7 +15,6 @@ export class WeatherApiService {
 
   getWeather(idcity : string = idCityDefault,cnt:number = 1,unidades:UnidadesCLima=UnidadesCLima.metric){
     let endPoint = `${urlapiweather}?id=${idcity}&APPID=${appidWeather}&cnt=${cnt}&units=${UnidadesCLima[unidades]}` ;
-    console.log(endPoint)
     return this.http.get<IWeatherApiResponse>(endPoint);
   }
 }
