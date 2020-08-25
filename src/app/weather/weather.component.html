@@ -1,6 +1,27 @@
-<p>{{this.temperatura | number:'1.0-0'}}</p>
-<p>{{this.ciudad}}</p>
-<p>{{this.pais}}</p>
-<p>{{this.velocidadViento | number:'1.0-0'}}</p>
-<p>{{this.humedad}}</p>
-<p>{{this.climaActual }}</p>
+<div *ngIf="datosClima" class="tarjeta">
+    <div class="item1">
+        {{this.ciudad | uppercase }}, {{this.pais | uppercase}}
+    </div>
+    <div class="item2 numero">
+        {{this.temperatura | number:'1.0-0'}}°
+    </div>
+    
+    <div class="item3">
+        <div class="numero">
+            {{this.lluvia | number:'1.0-0' }}
+        </div>
+        <br>
+        RAIN
+    </div>
+    
+    <div class="item4">
+        WIND
+        <br>
+        {{this.velocidadViento | number:'1.0-0'}}MPH
+    </div>
+
+    <div class="item5">
+        HUMEDITY<br>{{this.humedad}}%
+    </div>
+    
+</div>
