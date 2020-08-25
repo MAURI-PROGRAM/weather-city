@@ -14,7 +14,7 @@ export class WeatherComponent implements OnInit {
   temperatura:number;
   velocidadViento : number;
   humedad:number;
-  climaActual:string;
+  lluvia:number;
 
   constructor(
     private _weatherApiService: WeatherApiService
@@ -27,13 +27,18 @@ export class WeatherComponent implements OnInit {
   }
 
   async cargarClima(){
-    this.datosClima = await this._weatherApiService.getWeather().toPromise();
-    this.temperatura = this.datosClima.list[0].main.temp;
-    this.ciudad = this.datosClima.city.name;
-    this.pais = this.datosClima.city.country;
-    this.velocidadViento = this.mpsAmph(this.datosClima.list[0].wind.speed);
-    this.humedad = this.datosClima.list[0].main.humidity;
-    this.climaActual = this.datosClima.list[0].weather[0].main;
+    try{
+      this.datosClima = await this._weatherApiService.getWeather().toPromise();
+      this.temperatura = this.datosClima.list[0].main.temp || 0;
+      this.ciudad = this.datosClima.city.name || "";
+      this.pais = this.datosClima.city.country|| "";
+      this.velocidadViento = this.mpsAmph(this.datosClima.list[0].wind.speed)|| 0;
+      this.humedad = this.datosClima.list[0].main.humidity|| 0;
+      this.lluvia = this.datosClima.list[0].rain?.["3h"] || 0;
+    }catch{
+      alert("Ocurrio algun tipo de problema")
+    }
+    
 
   }
 
